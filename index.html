@@ -4,54 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artana Orçamentos</title>
-    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body style="margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; color: #333; display: flex; flex-direction: column; min-height: 100vh;">
 
-    <header>
-        <h1>Artana Orçamentos</h1>
-        <p>Solicite seu orçamento de forma rápida e prática</p>
+    <header style="background-color: #1e293b; color: #ffffff; text-align: center; padding: 2.5rem 1rem;">
+        <h1 style="margin: 0 0 0.5rem 0; font-size: 2.2rem;">Artana Orçamentos</h1>
+        <p style="margin: 0; font-size: 1rem; color: #94a3b8;">Solicite seu orçamento de forma rápida e prática</p>
     </header>
 
-    <main class="container">
-        <form id="form-orcamento">
-            <div class="form-group">
-                <label for="nome">Nome Completo</label>
-                <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+    <main style="flex: 1; display: flex; justify-content: center; align-items: center; padding: 2rem 1rem;">
+        <form id="form-orcamento" style="background: #ffffff; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); width: 100%; max-width: 550px;">
+            
+            <div style="margin-bottom: 1.25rem;">
+                <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; color: #475569;">Nome Completo</label>
+                <input type="text" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem; background-color: #f8fafc;" required>
             </div>
 
-            <div class="form-group">
-                <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+            <div style="margin-bottom: 1.25rem;">
+                <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; color: #475569;">E-mail</label>
+                <input type="email" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem; background-color: #f8fafc;" required>
             </div>
 
-            <div class="form-group">
-                <label for="whatsapp">WhatsApp / Telefone</label>
-                <input type="tel" id="whatsapp" name="whatsapp" placeholder="(11) 99999-9999" required>
+            <div style="margin-bottom: 1.25rem;">
+                <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; color: #475569;">WhatsApp</label>
+                <input type="tel" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem; background-color: #f8fafc;" required>
             </div>
 
-            <div class="form-group">
-                <label for="produto">Produto ou Serviço</label>
-                <select id="produto" name="produto" required>
+            <div style="margin-bottom: 1.25rem;">
+                <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; color: #475569;">Produto ou Serviço</label>
+                <select style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem; background-color: #f8fafc;" required>
                     <option value="" disabled selected>Selecione uma opção...</option>
-                    <option value="produto-1">Produto Tipo A</option>
-                    <option value="produto-2">Produto Tipo B</option>
-                    <option value="servico-1">Serviço de Reforma / Construção</option>
-                    <option value="outros">Outros</option>
+                    <option value="servico">Reforma / Construção</option>
+                    <option value="produto">Produto</option>
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="detalhes">Detalhes do Pedido</label>
-                <textarea id="detalhes" name="detalhes" rows="5" placeholder="Descreva a quantidade, medidas ou especificações do que precisa..." required></textarea>
+            <div style="margin-bottom: 1.25rem;">
+                <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; color: #475569;">Detalhes</label>
+                <textarea rows="5" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem; background-color: #f8fafc;"></textarea>
             </div>
 
-            <button type="submit" class="btn-enviar">Enviar Solicitação</button>
+            <button type="submit" style="width: 100%; padding: 0.85rem; background-color: #2563eb; color: white; border: none; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer;">Enviar Solicitação</button>
         </form>
     </main>
 
-    <footer>
-        <p>&copy; 2026 Artana Orçamentos. Todos os direitos reservados.</p>
+    <footer style="background-color: #0f172a; color: #94a3b8; text-align: center; padding: 1rem; font-size: 0.85rem;">
+        <p>&copy; 2026 Artana Orçamentos.</p>
     </footer>
 
 </body>
