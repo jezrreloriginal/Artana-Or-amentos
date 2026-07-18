@@ -19,26 +19,31 @@
                 <option value="deck">Deck (m²)</option>
                 <option value="rodape7">Rodapé 7cm (Metro Linear)</option>
                 <option value="rodape10">Rodapé 10cm (Metro Linear)</option>
+                <option value="ripado_linear">Ripado (Metro Linear)</option>
+                <option value="ripado_m2">Ripado (Metro Quadrado)</option>
             </select>
         </div>
 
         <div style="margin-bottom: 1rem;">
-            <label>Quantidade (m² ou m linear)</label>
+            <label>Quantidade</label>
             <input type="number" id="medida" step="0.01" required style="width: 100%; padding: 0.5rem; margin-top: 0.5rem;">
         </div>
 
-        <button type="button" onclick="calcular()" style="width: 100%; padding: 0.8rem; background-color: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer;">Calcular Orçamento</button>
+        <button type="button" onclick="calcular()" style="width: 100%; padding: 0.8rem; background-color: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer; margin-bottom: 0.5rem;">Calcular Orçamento</button>
+        
+        <button type="button" onclick="aplicarDesconto()" style="width: 100%; padding: 0.8rem; background-color: #059669; color: white; border: none; border-radius: 4px; cursor: pointer;">Aplicar 10% de Desconto</button>
         
         <div id="resultado" style="margin-top: 2rem; padding: 1rem; background: #e2e8f0; border-radius: 4px; display: none;"></div>
     </main>
 
     <script>
+        let valorTotalFinal = 0;
+
         function calcular() {
             let tipo = document.getElementById('produto').value;
             let qtd = parseFloat(document.getElementById('medida').value);
             if (!qtd) { alert("Digite a medida"); return; }
 
-            let resHtml = "";
             let divRes = document.getElementById('resultado');
             divRes.style.display = 'block';
 
@@ -51,27 +56,35 @@
                 let valPres = qtdPres * 2;
                 let qtdPara = (qtd * 22);
                 let valPara = qtdPara * 2;
-                let total = valDeck + valBar + valPres + valPara;
+                valorTotalFinal = valDeck + valBar + valPres + valPara;
 
-                resHtml = `<strong>Deck:</strong><br>
-                    Peças Deck: ${qtdDeck} (R$ ${valDeck.toFixed(2)})<br>
-                    Barrotes: ${qtdBar.toFixed(2)} (R$ ${valBar.toFixed(2)})<br>
-                    Presilhas: ${qtdPres.toFixed(2)} (R$ ${valPres.toFixed(2)})<br>
-                    Parafusos: ${qtdPara.toFixed(2)} (R$ ${valPara.toFixed(2)})<br>
-                    <hr><strong>TOTAL: R$ ${total.toFixed(2)}</strong>`;
-            } else {
-                // Cálculo para Rodapés
+                divRes.innerHTML = `<strong>Deck:</strong><br>Peças Deck: ${qtdDeck} (R$ ${valDeck.toFixed(2)})<br>Barrotes: ${qtdBar.toFixed(2)} (R$ ${valBar.toFixed(2)})<br>Presilhas: ${qtdPres.toFixed(2)} (R$ ${valPres.toFixed(2)})<br>Parafusos: ${qtdPara.toFixed(2)} (R$ ${valPara.toFixed(2)})<br><hr><strong>TOTAL: R$ ${valorTotalFinal.toFixed(2)}</strong>`;
+            } 
+            else if (tipo === 'ripado_linear') {
+                let pecas = Math.ceil(qtd / 0.16); // 16cm = 0.16m
+                valorTotalFinal = pecas * 50;
+                divRes.innerHTML = `<strong>Ripado Linear:</strong><br>${pecas} peças<br><hr><strong>TOTAL: R$ ${valorTotalFinal.toFixed(2)}</strong>`;
+            }
+            else if (tipo === 'ripado_m2') {
+                let pecas = Math.ceil(qtd / 0.46);
+                valorTotalFinal = pecas * 50;
+                divRes.innerHTML = `<strong>Ripado m²:</strong><br>${pecas} peças<br><hr><strong>TOTAL: R$ ${valorTotalFinal.toFixed(2)}</strong>`;
+            }
+            else {
                 let precoUnit = (tipo === 'rodape7') ? 25 : 37;
                 let qtdPecas = Math.ceil(qtd / 2.40);
-                let totalRodape = qtdPecas * precoUnit;
-
-                resHtml = `<strong>Rodapé ${tipo === 'rodape7' ? '7cm' : '10cm'}:</strong><br>
-                    Peças: ${qtdPecas} un.<br>
-                    Preço por peça: R$ ${precoUnit.toFixed(2)}<br>
-                    <hr><strong>TOTAL: R$ ${totalRodape.toFixed(2)}</strong>`;
+                valorTotalFinal = qtdPecas * precoUnit;
+                divRes.innerHTML = `<strong>Rodapé ${tipo === 'rodape7' ? '7cm' : '10cm'}:</strong><br>${qtdPecas} peças<br><hr><strong>TOTAL: R$ ${valorTotalFinal.toFixed(2)}</strong>`;
             }
+        }
 
-            divRes.innerHTML = resHtml;
+        function aplicarDesconto() {
+            if (valorTotalFinal > 0) {
+                valorTotalFinal = valorTotalFinal * 0.90;
+                document.getElementById('resultado').innerHTML += `<br><strong style="color: red;">TOTAL COM DESCONTO: R$ ${valorTotalFinal.toFixed(2)}</strong>`;
+            } else {
+                alert("Calcule um orçamento primeiro!");
+            }
         }
     </script>
 </body>
