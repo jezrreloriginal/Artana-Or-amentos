@@ -20,7 +20,9 @@
                 <option value="rodape7">Rodapé 7cm (Metro Linear)</option>
                 <option value="rodape10">Rodapé 10cm (Metro Linear)</option>
                 <option value="ripado_linear">Ripado (Metro Linear)</option>
-                <option value="ripado_m2">Ripado (Metro Quadrado)</option>
+                <option value="ripado_m2">Ripado (m²)</option>
+                <option value="ripado_ext_linear">Ripado Externo (Metro Linear)</option>
+                <option value="ripado_ext_m2">Ripado Externo (m²)</option>
             </select>
         </div>
 
@@ -57,18 +59,19 @@
                 let qtdPara = (qtd * 22);
                 let valPara = qtdPara * 2;
                 valorTotalFinal = valDeck + valBar + valPres + valPara;
-
-                divRes.innerHTML = `<strong>Deck:</strong><br>Peças Deck: ${qtdDeck} (R$ ${valDeck.toFixed(2)})<br>Barrotes: ${qtdBar.toFixed(2)} (R$ ${valBar.toFixed(2)})<br>Presilhas: ${qtdPres.toFixed(2)} (R$ ${valPres.toFixed(2)})<br>Parafusos: ${qtdPara.toFixed(2)} (R$ ${valPara.toFixed(2)})<br><hr><strong>TOTAL: R$ ${valorTotalFinal.toFixed(2)}</strong>`;
+                divRes.innerHTML = `<strong>Deck:</strong><br>Deck: ${qtdDeck} pçs (R$ ${valDeck.toFixed(2)})<br>Barrotes: ${qtdBar.toFixed(2)} pçs (R$ ${valBar.toFixed(2)})<br>Presilhas: ${qtdPres.toFixed(2)} pçs (R$ ${valPres.toFixed(2)})<br>Parafusos: ${qtdPara.toFixed(2)} pçs (R$ ${valPara.toFixed(2)})<br><hr><strong>TOTAL: R$ ${valorTotalFinal.toFixed(2)}</strong>`;
             } 
-            else if (tipo === 'ripado_linear') {
-                let pecas = Math.ceil(qtd / 0.16); // 16cm = 0.16m
+            else if (tipo === 'ripado_linear' || tipo === 'ripado_m2') {
+                let divisor = (tipo === 'ripado_linear') ? 0.16 : 0.46;
+                let pecas = Math.ceil(qtd / divisor);
                 valorTotalFinal = pecas * 50;
-                divRes.innerHTML = `<strong>Ripado Linear:</strong><br>${pecas} peças<br><hr><strong>TOTAL: R$ ${valorTotalFinal.toFixed(2)}</strong>`;
+                divRes.innerHTML = `<strong>Ripado (${tipo === 'ripado_linear' ? 'Linear' : 'm²'}):</strong><br>${pecas} peças<br><hr><strong>TOTAL: R$ ${valorTotalFinal.toFixed(2)}</strong>`;
             }
-            else if (tipo === 'ripado_m2') {
-                let pecas = Math.ceil(qtd / 0.46);
-                valorTotalFinal = pecas * 50;
-                divRes.innerHTML = `<strong>Ripado m²:</strong><br>${pecas} peças<br><hr><strong>TOTAL: R$ ${valorTotalFinal.toFixed(2)}</strong>`;
+            else if (tipo === 'ripado_ext_linear' || tipo === 'ripado_ext_m2') {
+                let divisor = (tipo === 'ripado_ext_linear') ? 0.16 : 0.46;
+                let pecas = Math.ceil(qtd / divisor);
+                valorTotalFinal = pecas * 150;
+                divRes.innerHTML = `<strong>Ripado Externo (${tipo === 'ripado_ext_linear' ? 'Linear' : 'm²'}):</strong><br>${pecas} peças<br><hr><strong>TOTAL: R$ ${valorTotalFinal.toFixed(2)}</strong>`;
             }
             else {
                 let precoUnit = (tipo === 'rodape7') ? 25 : 37;
