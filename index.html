@@ -5,52 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artana Orçamentos</title>
 </head>
-<body style="margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; color: #333; display: flex; flex-direction: column; min-height: 100vh;">
+<body style="margin: 0; padding: 0; font-family: sans-serif; background-color: #f4f6f9; color: #333; min-height: 100vh;">
 
-    <header style="background-color: #1e293b; color: #ffffff; text-align: center; padding: 2.5rem 1rem;">
-        <h1 style="margin: 0 0 0.5rem 0; font-size: 2.2rem;">Artana Orçamentos</h1>
-        <p style="margin: 0; font-size: 1rem; color: #94a3b8;">Solicite seu orçamento de forma rápida e prática</p>
+    <header style="background-color: #1e293b; color: #ffffff; text-align: center; padding: 2rem;">
+        <h1>Artana Orçamentos</h1>
     </header>
 
-    <main style="flex: 1; display: flex; justify-content: center; align-items: center; padding: 2rem 1rem;">
-        <form id="form-orcamento" style="background: #ffffff; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); width: 100%; max-width: 550px;">
+    <main style="display: flex; justify-content: center; padding: 2rem;">
+        <form id="form-orcamento" style="background: #ffffff; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 100%; max-width: 500px;">
             
-            <div style="margin-bottom: 1.25rem;">
-                <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; color: #475569;">Nome Completo</label>
-                <input type="text" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem; background-color: #f8fafc;" required>
+            <div style="margin-bottom: 1rem;">
+                <label>Metragem (m²)</label>
+                <input type="number" id="m2" step="0.01" required style="width: 100%; padding: 0.5rem; margin-top: 0.5rem;">
             </div>
 
-            <div style="margin-bottom: 1.25rem;">
-                <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; color: #475569;">E-mail</label>
-                <input type="email" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem; background-color: #f8fafc;" required>
-            </div>
-
-            <div style="margin-bottom: 1.25rem;">
-                <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; color: #475569;">WhatsApp</label>
-                <input type="tel" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem; background-color: #f8fafc;" required>
-            </div>
-
-            <div style="margin-bottom: 1.25rem;">
-                <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; color: #475569;">Produto ou Serviço</label>
-                <select style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem; background-color: #f8fafc;" required>
-                    <option value="" disabled selected>Selecione uma opção...</option>
-                    <option value="servico">Reforma / Construção</option>
-                    <option value="produto">Produto</option>
-                </select>
-            </div>
-
-            <div style="margin-bottom: 1.25rem;">
-                <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; color: #475569;">Detalhes</label>
-                <textarea rows="5" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem; background-color: #f8fafc;"></textarea>
-            </div>
-
-            <button type="submit" style="width: 100%; padding: 0.85rem; background-color: #2563eb; color: white; border: none; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer;">Enviar Solicitação</button>
+            <button type="button" onclick="calcular()" style="width: 100%; padding: 0.8rem; background-color: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer;">Calcular Orçamento</button>
+            
+            <div id="resultado" style="margin-top: 2rem; padding: 1rem; background: #e2e8f0; border-radius: 4px; display: none;"></div>
         </form>
     </main>
 
-    <footer style="background-color: #0f172a; color: #94a3b8; text-align: center; padding: 1rem; font-size: 0.85rem;">
-        <p>&copy; 2026 Artana Orçamentos.</p>
-    </footer>
+    <script>
+        function calcular() {
+            let m2 = parseFloat(document.getElementById('m2').value);
+            if (!m2) { alert("Digite a metragem"); return; }
 
+            // Cálculos
+            let qtdDeck = Math.ceil(m2 * 2.70);
+            let valDeck = qtdDeck * 150;
+
+            let qtdBar = (m2 * 1.20);
+            let valBar = qtdBar * 60;
+
+            let qtdPres = (m2 * 2.50);
+            let valPres = qtdPres * 2;
+
+            let qtdPara = (m2 * 22);
+            let valPara = qtdPara * 2;
+
+            let total = valDeck + valBar + valPres + valPara;
+
+            // Exibir
+            let divRes = document.getElementById('resultado');
+            divRes.style.display = 'block';
+            divRes.innerHTML = `
+                <strong>Resumo do Orçamento:</strong><br>
+                Deck: ${qtdDeck} peças - R$ ${valDeck.toFixed(2)}<br>
+                Barrotes: ${qtdBar.toFixed(2)} peças - R$ ${valBar.toFixed(2)}<br>
+                Presilhas: ${qtdPres.toFixed(2)} peças - R$ ${valPres.toFixed(2)}<br>
+                Parafusos: ${qtdPara.toFixed(2)} peças - R$ ${valPara.toFixed(2)}<br>
+                <hr>
+                <strong>VALOR TOTAL: R$ ${total.toFixed(2)}</strong>
+            `;
+        }
+    </script>
 </body>
 </html>
