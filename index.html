@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artana Orçamentos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Artana Orçamentos</h1>
+        <p>Solicite seu orçamento de forma rápida e prática</p>
+    </header>
+
+    <main class="container">
+        <form id="form-orcamento">
+            <div class="form-group">
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="whatsapp">WhatsApp / Telefone</label>
+                <input type="tel" id="whatsapp" name="whatsapp" placeholder="(11) 99999-9999" required>
+            </div>
+
+            <div class="form-group">
+                <label for="produto">Produto ou Serviço</label>
+                <select id="produto" name="produto" required>
+                    <option value="" disabled selected>Selecione uma opção...</option>
+                    <option value="produto-1">Produto Tipo A</option>
+                    <option value="produto-2">Produto Tipo B</option>
+                    <option value="servico-1">Serviço de Reforma / Construção</option>
+                    <option value="outros">Outros</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="detalhes">Detalhes do Pedido</label>
+                <textarea id="detalhes" name="detalhes" rows="5" placeholder="Descreva a quantidade, medidas ou especificações do que precisa..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-enviar">Enviar Solicitação</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Artana Orçamentos. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
